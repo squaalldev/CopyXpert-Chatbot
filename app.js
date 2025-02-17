@@ -1,5 +1,9 @@
-const room = new WebsimSocket();
-const { useState, useEffect, useRef } = React;
+import ChatMessages from './components/ChatMessages';
+import { useMessages } from './hooks/useMessages';
+import { validateMessage } from './utils/validation';
+import aiService from './services/aiService';
+
+// Add these imports to existing imports
 
 function App() {
   const messages = React.useSyncExternalStore(
