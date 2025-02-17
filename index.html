@@ -8,17 +8,7 @@
     window.process = { env: {} };
     
     // Load environment variables
-    fetch('/.env')
-      .then(response => response.text())
-      .then(text => {
-        text.split('\n').forEach(line => {
-          const [key, value] = line.split('=');
-          if (key && value) {
-            window.process.env[key.trim()] = value.trim();
-          }
-        });
-      })
-      .catch(err => console.error('Error loading .env file:', err));
+
   </script>
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
