@@ -1,7 +1,14 @@
-import ChatMessages from './components/ChatMessages';
-import { useMessages } from './hooks/useMessages';
-import { validateMessage } from './utils/validation';
-import aiService from './services/aiService';
+const express = require('express');
+const apiRouter = require('./backend/api');
+
+const app = express();
+app.use(express.json());
+app.use('/api', apiRouter);
+
+// Add existing static file serving
+app.use(express.static(__dirname));
+
+module.exports = app;
 
 // Add these imports to existing imports
 
