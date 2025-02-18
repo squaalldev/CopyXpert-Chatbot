@@ -1,12 +1,17 @@
+require('dotenv').config();
 const express = require('express');
-const apiRouter = require('./backend/api');
+const cors = require('cors');
+const api = require('./backend/api');
+const admin = require('./backend/routes/admin');
 
 const app = express();
-app.use(express.json());
-app.use('/api', apiRouter);
 
-// Add existing static file serving
-app.use(express.static(__dirname));
+app.use(cors({
+  origin: process.env.FRONTEND_URL
+}));
+app.use(express.json());
+app.use('/api', api);
+app.use('/admin', admin);
 
 module.exports = app;
 
