@@ -1,12 +1,13 @@
 const express = require('express');
-const { model } = require('./config');
+const { model, SYSTEM_PROMPT } = require('./config');
 
 const router = express.Router();
 
 router.post('/generate', async (req, res) => {
   try {
     const { prompt, file } = req.body;
-    const result = await model.generateContent(prompt);
+    const fullPrompt = `${SYSTEM_PROMPT}\n\nUsuario: ${prompt}\n\nAsistente:`;
+    const result = await model.generateContent(fullPrompt);
     const response = await result.response;
     res.json({ text: response.text() });
   } catch (error) {
