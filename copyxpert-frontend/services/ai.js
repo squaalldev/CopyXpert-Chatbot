@@ -1,12 +1,18 @@
 class AIService {
-  async generateResponse(prompt) {
+  async generateResponse(prompt, file = null) {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/generate`, {
+      const payload = { prompt };
+      if (file) {
+        const fileData = await this.processFile(file);
+        payload.file = fileData;
+      }
+      
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify(payload)
       });
       
       if (!response.ok) {
